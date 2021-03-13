@@ -32,6 +32,21 @@ pd.DataFrame(clusters).to_csv("P1/P1.csv",
 
 # P2
 
+Mean2 = [[0,0], [3,0], [0,1.5]]
+Cov2 = [[[1, 0], [0, 1]],
+	[[4, 0], [0, 4]],
+	[[1/4, 0], [0, 1/4]]]
+N2 = [100, 100, 100]
+
+clusters = [[],[],[]]
+
+for i in range(3):
+	for _ in range(N2[i]):
+		x, y = np.random.multivariate_normal(Mean2[i], Cov2[i])
+		clusters[i].append(np.array([x, y]))
+
+pd.DataFrame(clusters).to_csv("P2/P2.csv", 
+	header = None, index = None)
 
 # P3
 
@@ -52,3 +67,19 @@ pd.DataFrame(clusters).to_csv("P3/P3.csv",
 
 
 # P4
+
+Mean4 = [[0,0], [3,0], [0,1.5]]
+Cov4 = [[[1, 0], [0, 1]],
+	[[4, 0], [0, 4]],
+	[[1/4, 0], [0, 1/4]]]
+N4 = [100, 200, 100]
+
+clusters = [[],[],[]]
+
+for i in range(3):
+	for _ in range(N4[i]):
+		x, y = np.random.multivariate_normal(Mean4[i], Cov4[i])
+		clusters[i].append(np.array([x, y]))
+
+pd.DataFrame(clusters).to_csv("P4/P4.csv", 
+	header = None, index = None)

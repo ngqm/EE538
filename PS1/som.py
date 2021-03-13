@@ -10,7 +10,9 @@ def csv_to_list(path):
 	lists for x and y coordinates
 	"""
 	data = pd.read_csv(path, header = None)
-	X, Y = [[], [], []], [[], [], []]
+	# 4 subsets for X and Y since the maximum
+	# number of cluster is 4
+	X, Y = [[], [], [], []], [[], [], [], []]
 	for cluster in range(data.shape[0]):
 		for point in range(data.shape[1]):
 			try:
@@ -54,7 +56,7 @@ class SOM:
 							[1, np.sqrt(2), 1, 0]])
 			self.h = np.exp(-d2/(2*sigma**2))
 		else:
-			self.h = np.identity
+			self.h = np.identity(n_cluster)
 		
 		self.eta = 0.1 # learning rate
 		self.weights = []
@@ -99,6 +101,7 @@ class SOM:
 
 			# compute error
 			self.error.append(self.variance(data))
+
 
 	def winner(self, point):
 		"""
