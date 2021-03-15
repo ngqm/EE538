@@ -25,7 +25,7 @@ C1 = [[0,0], [3,0], [0,1.5]]
 R1 = [1, 2, 1/2]
 N1 = [100, 100, 100]
 
-generate.generate(type = 'uniform', C = C1, R = R1, 
+generate(type = 'uniform', C = C1, R = R1, 
 	N = N1, path = 'P1/P1.csv')
 ```
 
