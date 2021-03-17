@@ -85,9 +85,7 @@ class SOM:
 
 		# ITERATIVE LEARNING
 
-		for iteration in range(int(100)):
-
-			print("Iteration {}".format(iteration), end="\r")
+		for epoch in range(1, 101):
 			
 			self.clusters = []
 			# competition
@@ -101,6 +99,11 @@ class SOM:
 
 			# compute error
 			self.error.append(self.variance(data))
+
+			if epoch < 100:
+				print("Epoch {}".format(epoch), end="\r")
+			else:
+				print('Learning finished!')
 
 
 	def winner(self, point):

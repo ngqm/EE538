@@ -50,116 +50,50 @@ def plot_weight(path):
 
 # PLOTS
 
-# P0
-# using same data as P1, but no cooperation
 
-plt.figure(figsize = (16,8))
-plt.suptitle('P0: Uniform clusters, $N_1 = N_2 = N_3 = 100$, no cooperation')
+XLIM = [[-1,3], [-1,5], [-1,3], [-1,5]]
+YLIM = [[-1,3], [-3, 3], [-1, 3], [-3, 3]]
 
-# Generated data
-plt.subplot(241)
-plt.title('(a) Generated data')
-plot_cluster('P1/P1.csv', [-1,5], [-3,3])
-i = 0
-for c in C1:
-	plt.scatter(c[0], c[1], color = palette[i], marker = '^')
-	i += 1
+title = ['P1: [$x^2 + y^2 < 1$], [$(x-2)^2 + y^2 < 1$], [$x^2 + (y-2)^2 < 1$], $N_1 = N_2 = N_3 = 100$', 
+'P2: [$x^2 + y^2 < 1$], [$(x-3)^2 + y^2 < 4$], [$x^2 + (y-1.5)^2 < 0.25$], $N_1 = N_2 = N_3 = 100$', 
+'P3: [$x^2 + y^2 < 1$], [$(x-2)^2 + y^2 < 1$], [$x^2 + (y-2)^2 < 1$], $N_1 = N_3 = 100$, $N_2 = 200$', 
+'P4: [$x^2 + y^2 < 1$], [$(x-3)^2 + y^2 < 4$], [$x^2 + (y-1.5)^2 < 0.25$], $N_1 = N_3 = 100$, $N_2 = 200$']
 
-#-----#
+for problem in range(4):
 
-# 3 clusters
-plt.subplot(242)
-plt.title('(b) 3 learned clusters')
-plot_cluster('P0/b.csv', [-1,5], [-3,3])
-plot_weight('P0/bW.csv')
+	p = str(problem + 1)
 
-plt.subplot(246)
-plt.title('(b) Learning curve')
-plot_error('P0/bE.csv')
+	plt.figure(figsize = (16,8))
+	plt.suptitle(title[problem])
 
-#-----#
+	plt.subplot(241)
+	plt.title('(a) Generated data')
+	plot_cluster('P' + p + '/' + 'P' + 
+		p + '.csv', XLIM[problem], YLIM[problem])
 
-# 2 clusters
-plt.subplot(243)
-plt.title('(c) 2 learned clusters')
-plot_cluster('P0/c.csv', [-1,5], [-3,3])
-plot_weight('P0/cW.csv')
+	i = 0
+	for c in C[problem]:
+		plt.scatter(c[0], c[1], color = palette[i], marker = '^')
+		i += 1
 
-plt.subplot(247)
-plt.title('(c) Learning curve')
-plot_error('P0/cE.csv')
+	n_cluster = [3, 2, 4]
+	subproblem = ['b', 'c', 'd']	
 
-#-----#
+	for i, j, k in zip(n_cluster, subproblem, range(2,5)):
 
-# 4 clusters
-plt.subplot(244)
-plt.title('(d) 4 learned clusters')
-plot_cluster('P0/d.csv', [-1,5], [-3,3])
-plot_weight('P0/dW.csv')
+		plt.subplot(240+k)
+		plt.title('(' + j + ') ' + str(i) + ' learned clusters')
+		plot_cluster('P' + p + '/' + j + '.csv', XLIM[problem], YLIM[problem])
+		plot_weight('P' + p + '/' + j + 'W.csv')
 
-plt.subplot(248)
-plt.title('(d) Learning curve')
-plot_error('P0/dE.csv')
+		plt.subplot(244+k)
+		plt.title('(' + j + ')  Loss function')
+		plot_error('P' + p + '/' + j + 'E.csv')
 
-plt.savefig('P0/P0.jpg')
+	plt.savefig('P' + p + '/' + 'P' + p + '.jpg')
 
 
 '''
-# P1
-
-plt.figure(figsize = (16,8))
-plt.suptitle('P1: Uniform clusters, $N_1 = N_2 = N_3 = 100$')
-
-# Generated data
-plt.subplot(241)
-plt.title('(a) Generated data')
-plot_cluster('P1/P1.csv', [-1,5], [-3,3])
-i = 0
-for c in C1:
-	plt.scatter(c[0], c[1], color = palette[i], marker = '^')
-	i += 1
-
-#-----#
-
-# 3 clusters
-plt.subplot(242)
-plt.title('(b) 3 learned clusters')
-plot_cluster('P1/b.csv', [-1,5], [-3,3])
-plot_weight('P1/bW.csv')
-
-plt.subplot(246)
-plt.title('(b) Learning curve')
-plot_error('P1/bE.csv')
-
-#-----#
-
-# 2 clusters
-plt.subplot(243)
-plt.title('(c) 2 learned clusters')
-plot_cluster('P1/c.csv', [-1,5], [-3,3])
-plot_weight('P1/cW.csv')
-
-plt.subplot(247)
-plt.title('(c) Learning curve')
-plot_error('P1/cE.csv')
-
-#-----#
-
-# 4 clusters
-plt.subplot(244)
-plt.title('(d) 4 learned clusters')
-plot_cluster('P1/d.csv', [-1,5], [-3,3])
-plot_weight('P1/dW.csv')
-
-plt.subplot(248)
-plt.title('(d) Learning curve')
-plot_error('P1/dE.csv')
-
-plt.savefig('P1/P1.jpg')
-
-
-#----------#
-
 # P2
 
 plt.figure(figsize = (16,8))

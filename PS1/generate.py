@@ -4,6 +4,10 @@ import pandas as pd
 
 np.random.seed(0) # for reproduction
 
+
+# CONVENIENT FUNCTIONS
+
+
 def rand(a):
 	"""
 	Return uniform random number 
@@ -55,44 +59,28 @@ def generate(type, **param):
 			header = None, index = None)
 
 
-# P1
-
-C1 = [[0,0], [3,0], [0,1.5]]
-R1 = [1, 2, 1/2]
-N1 = [100, 100, 100]
-
-generate(type = 'uniform', C = C1, R = R1, 
-	N = N1, path = 'P1/P1.csv')
+# DATA GENERATION
 
 
-# P2
+C = [[[0,0], [2,0], [0,2]],		# P1
+	[[0,0], [3,0], [0, 1.5]],	# P2
+	[[0,0], [2,0], [0,2]],		# P3
+	[[0,0], [3,0], [0, 1.5]]]	# P4
 
-Mean2 = [[0,0], [3,0], [0,1.5]]
-Cov2 = [[[1, 0], [0, 1]],
-	[[4, 0], [0, 4]],
-	[[1/4, 0], [0, 1/4]]]
-N2 = [100, 100, 100]
+R = [[1, 1, 1],		# P1
+	[1, 2, .5],		# P2
+	[1, 1, 1],		# P3
+	[1, 2, .5]]		# P4
 
-generate(type = 'gaussian', mean = Mean2, 
-	cov = Cov2, N = N2, path = 'P2/P2.csv')
+N = [[100, 100, 100],	# P1
+	[100, 100, 100],	# P2
+	[100, 200, 100],	# P3
+	[100, 200, 100]]	# P4
 
-# P3
+for problem in range(4):
 
-C3 = [[0,0], [3,0], [0,1.5]]
-R3 = [1, 2, 1/2]
-N3 = [100, 200, 100]
+	p = str(problem + 1)
 
-generate(type = 'uniform', C = C3, R = R3, 
-	N = N3, path = 'P3/P3.csv')
-
-
-# P4
-
-Mean4 = [[0,0], [3,0], [0,1.5]]
-Cov4 = [[[1, 0], [0, 1]],
-	[[4, 0], [0, 4]],
-	[[1/4, 0], [0, 1/4]]]
-N4 = [100, 200, 100]
-
-generate(type = 'gaussian', mean = Mean4, 
-	cov = Cov4, N = N4, path = 'P4/P4.csv')
+	generate(type = 'uniform', C = C[problem],
+		R = R[problem], N = N[problem],
+		path = 'P' + p + '/' + 'P' + p + '.csv')
