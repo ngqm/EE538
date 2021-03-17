@@ -1,4 +1,4 @@
-# Homework 1: Clustering
+# Homework 1: Self-Organizing Clusters
 
 In this homework, I implemented a solution to the clustering problem using 
 the self-organizing principle. Specifically,
