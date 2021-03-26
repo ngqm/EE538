@@ -51,8 +51,8 @@ for i in range(12):
 	# plot setup
 	plt.subplot(3, 4, i+1)
 	plt.title(f'$\\theta$ = {theta} mV, $\\tau_m$ = {tau} ms, $V_i$ = {v} mV')
-	plt.xlabel('Time (ms)')
-	plt.ylabel('Membrane potential (mV)')
+	plt.xlabel('Time $t$ (ms)')
+	plt.ylabel('Membrane potential $u$ (mV)')
 
 	# plot
 	plt.plot(Time, adjusted_u(tau, theta, v, Time))

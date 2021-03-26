@@ -23,7 +23,7 @@ Tau = Tau.flatten()
 
 plt.figure(figsize = (7,5))
 plt.title('(d) Firing frequency as a function of $V_i$')
-plt.xlabel('$V_i$ (mV)')
+plt.xlabel('Input potential $V_i$ (mV)')
 plt.ylabel('Firing frequency $f$ ($ms^{-1}$)')
 
 for i in range(6):
