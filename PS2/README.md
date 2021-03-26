@@ -1,5 +1,22 @@
 # Homework 2: PCA and Integrate-and-Fire Model
 
+## Problem 1: Hebbian-Based Principal Component Analysis
+
+We generalize 600 3-dimensional data points, each 200 
+distributed uniformly in a cylindrical region. The principal 
+components can be analyzed with `scikit-learn`, as shown below.
+
+![P1a](P1a.jpg)
+
+We can also use the generalized Hebbian algorithm, which yields 
+the following result.
+
+![P1ce](P1ce.jpg)
+
+The algorithm converges quickly after a few epochs.
+
+![P1ceE](P1ceE.jpg)
+
 ## Problem 2: Integrate-and-Fire Model
 
 In problem (b), the membrane potential is plotted as

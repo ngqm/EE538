@@ -4,6 +4,8 @@ plt.style.use('seaborn')
 
 from P2d import f 
 
+np.random.seed(0) # for reproducibility
+
 
 def sum_f(Tau, Theta, v):
 	"""
