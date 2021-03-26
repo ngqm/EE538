@@ -5,25 +5,15 @@ plt.style.use('seaborn')
 from P2d import f 
 
 
-def sum_f(Tau, Theta, V):
+def sum_f(Tau, Theta, v):
 	"""
 	total spikes per unit time, defined
 	on array of theta and tau
 	"""
 
-	# eliminate unphysical time constants
-	new_Tau = [tau for tau in Tau if tau > 0]
+	F = [f(tau, theta, v) for tau, theta in zip(Tau, Theta)]
 
-	# eliminate neurons which never fire
-	new_Theta = [theta for theta in Theta if theta < V and theta > 0]
-
-	old_len = len(new_Theta)
-	new_len = min(len(new_Tau), len(new_Theta))
-
-	new_Tau = new_Tau[:new_len]
-	new_Theta = new_Theta[:new_len]
-
-	return new_len/old_len*np.sum(f(new_Tau, new_Theta, V))
+	return np.sum(F)
 
 
 # the means
@@ -34,8 +24,10 @@ Theta, Tau = np.meshgrid(Theta, Tau)
 Theta = Theta.flatten()
 Tau = Tau.flatten()
 
-plt.figure(figsize = (18,10))
-plt.suptitle('(e) Total firing frequency as a function of $V_i$')
+plt.figure(figsize = (7,5))
+plt.title('(e) Total firing frequency as a function of $V_i$')
+plt.xlabel('$V_i$ (mV)')
+plt.ylabel('Total firing frequency $\Sigma f$ ($ms^{-1}$)')
 
 epsilon = 10e-6
 
@@ -43,20 +35,21 @@ for i in range(6):
 
 	tau, theta = Tau[i], Theta[i]
 
-	Tau_array = tau/10*np.random.randn(200) + tau
+	Tau_array = []
+
+	while len(Tau_array) < 200:
+	
+		random_tau = tau/10*np.random.randn() + tau
+		if random_tau > 0:
+			Tau_array.append(random_tau)
+
 	Theta_array = theta/10*np.random.randn(200) + theta
 	
-	V = np.arange(theta+2,theta+10,.5)	# mV
-	
-	# plot setup
-	plt.subplot(231+i)
-	plt.title(f'$\\tau_m$ = {tau} ms, $\\theta$ = {theta} mV')
-	plt.xlabel('$V_i$ (mV)')
-	plt.ylabel('Firing frequency ($ms^{-1}$)')
-
-	Sum_f = [sum_f(Tau_array, Theta_array, v) for v in V]
+	V = np.arange(0, 40, .2)	# mV
+	Frequency = [sum_f(Tau_array, Theta_array, v) for v in V]
 
 	# plot
-	plt.plot(V, Sum_f)
+	plt.plot(V, Frequency, label = f'$\\bar \\tau_m$ = {tau} ms, $\\bar \\theta$ = {theta} mV')
+	plt.legend()
 	
 plt.savefig('P2e.jpg')
