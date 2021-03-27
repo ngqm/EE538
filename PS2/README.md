@@ -36,3 +36,12 @@ distributed time constants and thresholds. The total
 firing frequency is then plotted against input potential.
 
 ![P2e](P2e.jpg)
+
+We also plot the individual firing frequencies and membrane
+potential.
+
+![P2ef](P2ef.jpg)
+
+![P2eu30](P2eu30.jpg)
+
+![P2eu35](P2eu35.jpg)

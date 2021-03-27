@@ -56,9 +56,9 @@ ax.set_zlabel('$x_3$')
 
 X, Y, Z = data[:,0], data[:,1], data[:,2]
 
-ax.scatter(X, Y, Z, alpha = .5)
+ax.scatter(X, Y, Z, alpha = .5, color = 'g')
 
-colors = ['r', 'g', 'y']
+colors = ['r', 'b', 'y']
 for i in range(3):
 	ax.quiver(mean[0], mean[1], mean[2], 
 		eigen[i][0], eigen[i][1], eigen[i][2],
@@ -92,7 +92,7 @@ for epoch in range(max_epoch):
 	mu = mu0*np.exp(-epoch) # adaptive learning rate
 	
 	shuffled_data = np.random.permutation(normalized_data)
-	for x in shuffled_data:
+	for i, x in enumerate(shuffled_data):	
 
 		y1 = np.dot(w1, x)
 		y2 = np.dot(w2, x)
@@ -123,9 +123,9 @@ ax.set_xlabel('$x_1$')
 ax.set_ylabel('$x_2$')
 ax.set_zlabel('$x_3$')
 
-ax.scatter(X, Y, Z, alpha = .5)
+ax.scatter(X, Y, Z, alpha = .5, color = 'g')
 
-colors = ['r', 'g']
+colors = ['r', 'b']
 for i in range(2):
 	ax.quiver(mean[0], mean[1], mean[2], 
 		learned_eigen[i][0], learned_eigen[i][1], 

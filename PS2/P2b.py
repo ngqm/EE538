@@ -24,10 +24,12 @@ def adjusted_u(tau, theta, V, t):
 	membrane potential adjusted for threshold
 	"""
 
-	period = T(tau, theta, V)
-	adjusted_t = t - (t/period).astype(int)*period
-
-	return u(tau, V, adjusted_t)
+	if V > theta:
+		period = T(tau, theta, V)
+		adjusted_t = t - (t/period).astype(int)*period
+		return u(tau, V, adjusted_t)
+	else:
+		return u(tau, V, t)
 
 
 Theta = [15, 20, 25]		# mV
@@ -55,6 +57,6 @@ for i in range(12):
 	plt.ylabel('Membrane potential $u$ (mV)')
 
 	# plot
-	plt.plot(Time, adjusted_u(tau, theta, v, Time))
+	plt.plot(Time, adjusted_u(tau, theta, v, Time), color = 'g')
 
 plt.savefig('P2b.jpg')
