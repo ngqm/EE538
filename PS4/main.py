@@ -197,7 +197,68 @@ plt.savefig('perceptron2.jpg')
 
 # Multilayer perceptron
 
-from mlp import *
+from network import Network
+from fclayer import FCLayer
+from activation_layer import ActivationLayer
+from activations import *
+from losses import mse, mse_prime
 
-MyMLP = MLP(width = [2,3,1], n_layer = 2, activation=ReLU)
-MyMLP.learn(data, label)
+# training data
+x_train = np.array([[x] for x in data])
+y_train = np.array([[(y+1)/2] for y in label])
+
+# network
+net = Network()
+net.add(FCLayer(2, 2))
+net.add(ActivationLayer(ReLU, ReLU_prime))
+net.add(FCLayer(2, 1))
+net.add(ActivationLayer(sigmoid, sigmoid_prime))
+
+
+plt.figure(figsize = (35,14))
+plt.suptitle('(8) 1 hidden layer, 2 neurons each, ReLU nonlinearity with different initializations', 
+	size = 'xx-large')
+
+for i in range(5): 
+
+	# train
+	net.use(mse, mse_prime)
+	net.fit(x_train, y_train, epochs=100, learning_rate=.002)
+
+	# decision boundary
+
+	plt.subplot(2,5,1+i)
+	plt.title(f'Initialization {i+1}')
+	plt.xlim(-14,24)
+	plt.ylim(-12,16)
+
+	class0, class1 = net.mlpcolor_code(x_train)
+	plt.scatter(class0[:,0,0], class0[:,0,1], 
+		color = colors[0], alpha=.3, label='Class 0')
+	plt.scatter(class1[:,0,0], class1[:,0,1], 
+		color = colors[1], alpha=.3, label='Class 1')	
+
+	# decision regions
+	x = np.arange(-14,24,.3)
+	y = np.arange(-12,16,.3)
+	xx, yy = np.meshgrid(x,y)
+	xx, yy = xx.flatten(), yy.flatten()
+	mesh_data = [[x,y] for x, y in zip(xx,yy)]
+	mesh_train = np.array([[x] for x in mesh_data])
+	class0, class1 = net.mlpcolor_code(mesh_train)
+	plt.scatter(class0[:,0,0], class0[:,0,1], 
+		color = colors[0], alpha=.1, marker='+')
+	plt.scatter(class1[:,0,0], class1[:,0,1],
+		color = colors[1], alpha=.1, marker='+')
+	plt.legend()
+
+
+	# learning curve
+	plt.subplot(2,5,6+i)
+	plt.title('Learning curve')
+	plt.xlabel('Epoch')
+	plt.ylabel('Cost')
+	plt.plot(range(100), net.log)
+
+
+plt.savefig('mlp82.jpg')
