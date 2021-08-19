@@ -1,5 +1,7 @@
 # EE538 Neural Networks
 
+This is an incomplete list of homework for EE538. Problem sets with only theory questions are not included.
+
 - [Homework 1: Self-Organizing Clusters](https://github.com/ngqm/EE538/tree/main/PS1)
 - [Homework 2: PCA and Integrate-and-Fire Model](https://github.com/ngqm/EE538/tree/main/PS2)
 - [Homework 3: Bayes classifier and Perceptron](https://github.com/ngqm/EE538/tree/main/PS3)
